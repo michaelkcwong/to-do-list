@@ -2,6 +2,7 @@
 let todoItems = [];
 
 function renderTodo(todo) {
+  localStorage.setItem('todoItemsRef', JSON.stringify(todoItems));
   const list = document.querySelector('.js-todo-list');
   // select the current todo item in the DOM
   const item = document.querySelector(`[data-key='${todo.id}']`);
@@ -10,6 +11,8 @@ function renderTodo(todo) {
   if (todo.deleted) {
     // remove the item from the DOM
     item.remove();
+    //add this line to clear whitespace from the list container when 'todoItems' is empty
+    if (todoItems.length === 0) list.innerHTML = '';
     return
   }
 
@@ -102,5 +105,15 @@ list.addEventListener('click', event => {
   if(event.target.classList.contains('js-delete-todo')) {
     const itemKey = event.target.parentElement.dataset.key;
     deleteTodo(itemKey);
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const ref = localStorage.getItem('todoItemsRef');
+  if (ref) {
+    todoItems = JSON.parse(ref);
+    todoItems.forEach(t => {
+      renderTodo(t);
+    });
   }
 });
