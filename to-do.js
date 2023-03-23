@@ -2,7 +2,7 @@
 let todoItems = [];
 
 function renderTodo(todo) {
-  localStorage.setItem('todoItems', JSON.stringify(todoItems));
+  localStorage.setItem('todoItemsRef', JSON.stringify(todoItems));
   const list = document.querySelector('.js-todo-list');
   // select the current todo item in the DOM
   const item = document.querySelector(`[data-key='${todo.id}']`);
