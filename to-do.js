@@ -2,16 +2,16 @@
 let todoItems = [];
 
 function renderTodo(todo) {
-  localStorage.setItem('todoItemsRef', JSON.stringify(todoItems));
+  localStorage.setItem('todoItems', JSON.stringify(todoItems));
   const list = document.querySelector('.js-todo-list');
   // select the current todo item in the DOM
   const item = document.querySelector(`[data-key='${todo.id}']`);
 
   // add this if block
   if (todo.deleted) {
-    // remove the item from the DOM
     item.remove();
-    //add this line to clear whitespace from the list container when 'todoItems' is empty
+    // add this line to clear whitespace from the list container
+    // when `todoItems` is empty
     if (todoItems.length === 0) list.innerHTML = '';
     return
   }
